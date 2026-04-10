@@ -1,0 +1,110 @@
+# ===========================================
+# OS
+# ===========================================
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# ===========================================
+# Compiled binaries & executables
+# ===========================================
+.clangd/
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.lib
+*.a
+*.class
+
+# ===========================================
+# .NET / C#  (dotnet build output & VS cache)
+# ===========================================
+bin/
+obj/
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.nuspec
+*.nupkg
+*.sln.ide/
+.vs/
+.vscode/
+
+# ===========================================
+# JavaScript / TypeScript  (npm / yarn / bun)
+# ===========================================
+node_modules/
+dist/
+dist-ssr/
+coverage/
+.nyc_output/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# ===========================================
+# Python
+# ===========================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+venv/
+.venv/
+.env/
+
+# ===========================================
+# Java
+# ===========================================
+target/
+build/
+*.jar
+*.war
+*.ear
+*.iml
+
+# Eclipse IDE metadata
+.settings/
+.classpath
+.project
+.metadata/
+.cproject
+*.launch
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties/
+
+# ===========================================
+# Rust
+# ===========================================
+target/
+
+# ===========================================
+# C
+# ===========================================
+*.exe
+*.o
+
+# ===========================================
+# JetBrains IDE (general)
+# ===========================================
+.idea/
+*.swp
+*.swo
+*~

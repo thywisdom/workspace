@@ -1,0 +1,38 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebApiDemo.Models
+{
+    public class Employee
+    {
+        [Key]
+        public int EmployeeId { get; set; }
+
+        [Required(ErrorMessage = "Employee name is required")]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 100 characters")]
+        public string EmployeeName { get; set; }
+
+        [Required(ErrorMessage = "Designation is required")]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "Designation must be between 5 and 50 characters")]
+        public string Designation { get; set; }
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
+        [StringLength(150)]
+        public string Email { get; set; }
+
+        [Phone(ErrorMessage = "Invalid phone number format")]
+        [StringLength(15)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Column(TypeName = "date")] 
+        public DateTime DateOfJoining { get; set; }
+
+        [Range(0, double.MaxValue, ErrorMessage = "Salary must be non-negative")]
+        [Column(TypeName = "decimal(12,2)")]
+        public decimal Salary { get; set; }
+
+    }
+}

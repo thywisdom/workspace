@@ -1,0 +1,72 @@
+using System;
+using System.Data;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+public class Order
+{
+    public int OrderID { get; set;}
+    public double OrderAmount { get; set; }
+}
+
+public class Customer
+{
+    public int CustomerID { get; set;}
+    public string Name { get; set;}
+    public List<Order> Orders { get; set;}
+}
+
+public class Program
+{
+    static string SerializeCustomer ( Customer customer)
+    {
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true
+        };
+
+        return JsonSerializer.Serialize(customer,options);
+    }
+
+    static Customer DeserializeCustomer( string json )
+    {
+        return JsonSerializer.Deserialize<Customer>(json);
+    }
+
+      static void Main(string[] args)
+        {
+            // Create Customer object with multiple orders
+            Customer customer = new Customer
+            {
+                CustomerID = 1,
+                Name = "Suman",
+                Orders = new List<Order>
+                {
+                    new Order { OrderID = 101, OrderAmount = 2500.50 },
+                    new Order { OrderID = 102, OrderAmount = 1750.75 },
+                    new Order { OrderID = 103, OrderAmount = 3200.00 }
+                }
+            };
+
+            // Serialize to JSON
+            string jsonData = SerializeCustomer(customer);
+
+            Console.WriteLine("Serialized JSON:");
+            Console.WriteLine(jsonData);
+
+            Console.WriteLine("\n----------------------\n");
+
+            // Deserialize back to object
+            Customer deserializedCustomer = DeserializeCustomer(jsonData);
+
+            Console.WriteLine("Deserialized Object:");
+            Console.WriteLine($"Customer ID: {deserializedCustomer.CustomerID}");
+            Console.WriteLine($"Name: {deserializedCustomer.Name}");
+
+            foreach (var order in deserializedCustomer.Orders)
+            {
+                Console.WriteLine($"Order ID: {order.OrderID}, Amount: {order.OrderAmount}");
+            }
+        }
+    
+}

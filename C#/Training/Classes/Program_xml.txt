@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+
+namespace XmlSerializationDemo
+{
+    // Product class
+    public class Product
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+    }
+
+    // Store class (contains list of Products)
+    public class Store
+    {
+        public int StoreID { get; set; }
+        public string StoreName { get; set; }
+
+        public List<Product> Products { get; set; }
+    }
+
+    class Program
+    {
+        // Serialize Store object to XML
+        static string SerializeStore(Store store)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Store));
+
+            using (StringWriter writer = new StringWriter())
+            {
+                serializer.Serialize(writer, store);
+                return writer.ToString();
+            }
+        }
+
+        // Deserialize XML back to Store object
+        static Store DeserializeStore(string xml)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Store));
+
+            using (StringReader reader = new StringReader(xml))
+            {
+                return (Store)serializer.Deserialize(reader);
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            // Create Store object with multiple products
+            Store store = new Store
+            {
+                StoreID = 1,
+                StoreName = "Tech Store",
+                Products = new List<Product>
+                {
+                    new Product { ProductID = 101, ProductName = "Laptop" },
+                    new Product { ProductID = 102, ProductName = "Mouse" },
+                    new Product { ProductID = 103, ProductName = "Keyboard" }
+                }
+            };
+
+            // Serialize to XML
+            string xmlData = SerializeStore(store);
+
+            Console.WriteLine("Serialized XML:");
+            Console.WriteLine(xmlData);
+
+            Console.WriteLine("\n----------------------\n");
+
+            // Deserialize back to object
+            Store deserializedStore = DeserializeStore(xmlData);
+
+            Console.WriteLine("Deserialized Object:");
+            Console.WriteLine($"Store ID: {deserializedStore.StoreID}");
+            Console.WriteLine($"Store Name: {deserializedStore.StoreName}");
+
+            foreach (var product in deserializedStore.Products)
+            {
+                Console.WriteLine($"Product ID: {product.ProductID}, Name: {product.ProductName}");
+            }
+        }
+    }
+}
